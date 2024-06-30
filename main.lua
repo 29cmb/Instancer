@@ -15,11 +15,12 @@ function love.load()
     ins2.Position.Y = 20
     ins2.Name = "thing2"
 end
-local drawn = false
+
 function love.draw()
     ins:draw()
     ins2:draw()
 end
 
 function love.update(dt)
+    
 end
