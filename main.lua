@@ -1,14 +1,13 @@
 local Instance = require("instancer.instance")
 
-local playerImage
-
 function love.load()
-    playerImage = love.graphics.newImage("images/player.png") -- Load the image once
+    local playerImage = love.graphics.newImage("images/player.png")
 
     ins = Instance.new("Sprite")
     ins.Sprite = playerImage
     ins.Position.X = 0
     ins.Position.Y = 0
+    ins.Transparency = 0.5
 
     ins2 = Instance.new("Sprite")
     ins2.Sprite = playerImage
@@ -18,12 +17,8 @@ function love.load()
 end
 local drawn = false
 function love.draw()
-    if drawn == false then 
-        drawn = false
-        ins:draw()
-        ins2:draw()
-    end
-    
+    ins:draw()
+    ins2:draw()
 end
 
 function love.update(dt)

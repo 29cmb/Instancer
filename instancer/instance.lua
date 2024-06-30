@@ -8,7 +8,8 @@ function instance.new(className, object)
         ["ClassName"] = "",
         ["Position"] = {["X"] = 0, ["Y"] = 0},
         ["Size"] = {["X"] = 0, ["Y"] = 0},
-        ["Sprite"] = nil
+        ["Sprite"] = nil,
+        ["Transparency"] = 0
     }
     
     setmetatable(object, instance)
@@ -20,7 +21,7 @@ end
 function instance:draw()
     if self.ClassName == "Sprite" then
         if not self.Sprite then return end
-
+        love.graphics.setColor(1, 1, 1, 1 - self.Transparency)
         love.graphics.draw(self.Sprite, self.Position.X, self.Position.Y)
     end
 end
