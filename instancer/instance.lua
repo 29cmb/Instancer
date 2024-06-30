@@ -1,26 +1,28 @@
-instance = {}
+local instance = {}
+instance.__index = instance
 
-local Properties = {
-    ["Name"] = "thing",
-    ["Position"] = {["X"] = 0, ["Y"] = 0},
-    ["Size"] = {["X"] = 0, ["Y"] = 0},
-    ["Sprite"] = ""
-}
 
-function instance.new(object)
-    object = object or {}
+function instance.new(className, object)
+    object = object or {
+        ["Name"] = "thing",
+        ["ClassName"] = "",
+        ["Position"] = {["X"] = 0, ["Y"] = 0},
+        ["Size"] = {["X"] = 0, ["Y"] = 0},
+        ["Sprite"] = nil
+    }
+    
     setmetatable(object, instance)
-    instance.__index = instance
 
-    for name,prop in pairs(Properties) do 
-        object[name] = prop
-    end
-
+    object.ClassName = className or "Sprite"
     return object
 end
 
-function instance:getName()
-    return self.Name or "no"
+function instance:draw()
+    if self.ClassName == "Sprite" then
+        if not self.Sprite then return end
+
+        love.graphics.draw(self.Sprite, self.Position.X, self.Position.Y)
+    end
 end
 
 return instance
